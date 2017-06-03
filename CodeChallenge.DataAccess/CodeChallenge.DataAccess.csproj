@@ -53,7 +53,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="SampleData\airports.csv" />
+    <None Include="SampleData\airports.csv">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="SampleData\flights.csv">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
