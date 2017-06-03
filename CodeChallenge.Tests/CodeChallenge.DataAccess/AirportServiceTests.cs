@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using CodeChallenge.DataAccess;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,7 @@ namespace CodeChallenge.Tests.CodeChallenge.DataAccess
             var airportService = new AirportService();
 
             // Act
-            
+            var results = airportService.GetAirports();
 
             // Assert
             
