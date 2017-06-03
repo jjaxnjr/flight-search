@@ -1,13 +1,10 @@
-﻿using System;
+﻿using CodeChallenge.DataAccess.Models;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CodeChallenge.DataAccess.Interfaces
 {
     public interface IAirportService
     {
-        
+        IEnumerable<Airport> GetAirports();
     }
 }
