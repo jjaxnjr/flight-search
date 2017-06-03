@@ -1,10 +1,7 @@
 ﻿using CodeChallenge.DataAccess;
+using CodeChallenge.DataAccess.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CodeChallenge.Tests.CodeChallenge.DataAccess
 {
@@ -12,7 +9,7 @@ namespace CodeChallenge.Tests.CodeChallenge.DataAccess
     public class AirportServiceTests
     {
         [TestMethod]
-        public void GetAirportData()
+        public void GetAirportDataIsAnEnumerableOfAirports()
         {
             // Arrange
             var airportService = new AirportService();
@@ -21,7 +18,9 @@ namespace CodeChallenge.Tests.CodeChallenge.DataAccess
             var results = airportService.GetAirports();
 
             // Assert
-            
+            Assert.IsInstanceOfType(results, typeof(IEnumerable<Airport>));
         }
+
+
     }
 }
