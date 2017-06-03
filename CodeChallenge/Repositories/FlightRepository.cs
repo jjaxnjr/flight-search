@@ -4,6 +4,7 @@ using CodeChallenge.Interfaces;
 using CodeChallenge.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CodeChallenge
 {
@@ -22,7 +23,10 @@ namespace CodeChallenge
             {
                 throw new ArgumentException("From and To airports must be different");
             }
-            return Mapper.Map<IEnumerable<FlightViewModel>>(flightService.GetFlights());
+            var results = flightService.GetFlights()
+                                       .Where(f => f.From.ToUpper().Equals(from.ToUpper()) &&
+                                                   f.To.ToUpper().Equals(to.ToUpper()));
+            return Mapper.Map<IEnumerable<FlightViewModel>>(results);
         }
     }
 }
