@@ -43,7 +43,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AirportService.cs" />
     <Compile Include="FlightService.cs" />
+    <Compile Include="Interfaces\IAirportService.cs" />
     <Compile Include="Interfaces\IFlightService.cs" />
     <Compile Include="Models\Airport.cs" />
     <Compile Include="Models\Flight.cs" />
