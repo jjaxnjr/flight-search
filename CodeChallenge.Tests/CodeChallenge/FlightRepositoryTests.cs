@@ -1,5 +1,7 @@
-﻿using CodeChallenge.DataAccess.Interfaces;
+﻿using AutoMapper;
+using CodeChallenge.DataAccess.Interfaces;
 using CodeChallenge.DataAccess.Models;
+using CodeChallenge.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Collections.Generic;
@@ -15,6 +17,8 @@ namespace CodeChallenge.Tests.CodeChallenge.DataAccess
         [TestInitialize]
         public void Initialize()
         {
+            Mapper.Initialize(cfg => cfg.CreateMap<Flight, FlightViewModel>());
+
             flightService = new Mock<IFlightService>();
             flightService.Setup(f => f.GetFlights()).Returns(SampleData.FlightData);
         }

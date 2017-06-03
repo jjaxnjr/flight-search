@@ -101,6 +101,23 @@ namespace CodeChallenge.Tests
             // Exception Throw and handled by Method Attribute
         }
 
+        [TestMethod]
+        public void GetFlightsFromSeaToLasReturnsAFlightObject()
+        {
+            // Arrange
+            var flightRepository = new FlightRepository(flightServiceMock.Object);
+            var flightController = new FlightController(flightRepository);
+            var from = "SEA";
+            var to = "LAS";
 
+            // Act
+            var flights = flightController.GetFlights(from, to);
+            var flightData = flights.Data as List<FlightViewModel>;
+
+            // Assert
+            Assert.AreEqual(1, flightData.Count);
+            Assert.AreEqual("SEA", flightData[0].From);
+            Assert.AreEqual("LAS", flightData[0].To);
+        }
     }
 }

@@ -1,10 +1,7 @@
-﻿using CodeChallenge.DataAccess.Models;
+﻿using AutoMapper;
+using CodeChallenge.DataAccess.Models;
 using CodeChallenge.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CodeChallenge.Tests
 {
@@ -18,23 +15,33 @@ namespace CodeChallenge.Tests
                 {
                     new Flight
                     {
+                        FlightNumber = "1000",
                         From = "SEA",
                         To = "LAX",
-                        Arrives = "8:00 PM",
                         Departs = "6:00 PM",
-                        FirstClassPrice = "200",
-                        FlightNumber = "1000",
-                        MainCabinPrice = "100"
+                        Arrives = "8:00 PM",
+                        MainCabinPrice = "100",
+                        FirstClassPrice = "200"
                     },
                     new Flight
                     {
+                        FlightNumber = "1100",
+                        From = "SEA",
+                        To = "LAX",
+                        Departs = "7:00 PM",
+                        Arrives = "9:00 PM",
+                        MainCabinPrice = "150",
+                        FirstClassPrice = "250"
+                    },
+                    new Flight
+                    {
+                        FlightNumber = "2000",
                         From = "SEA",
                         To = "LAS",
-                        Arrives = "9:00 PM",
-                        Departs = "7:00 PM",
-                        FirstClassPrice = "200",
-                        FlightNumber = "2000",
-                        MainCabinPrice = "100"
+                        Departs = "5:00 PM",
+                        Arrives = "7:00 PM",
+                        MainCabinPrice = "200",
+                        FirstClassPrice = "400"
                     }
                 };
             }
@@ -44,29 +51,7 @@ namespace CodeChallenge.Tests
         {
             get
             {
-                return new List<FlightViewModel>
-                {
-                    new FlightViewModel
-                    {
-                        From = "SEA",
-                        To = "LAX",
-                        Arrives = "8:00 PM",
-                        Departs = "6:00 PM",
-                        FirstClassPrice = "200",
-                        FlightNumber = "1000",
-                        MainCabinPrice = "100"
-                    },
-                    new FlightViewModel
-                    {
-                        From = "SEA",
-                        To = "LAS",
-                        Arrives = "9:00 PM",
-                        Departs = "7:00 PM",
-                        FirstClassPrice = "200",
-                        FlightNumber = "2000",
-                        MainCabinPrice = "100"
-                    }
-                };
+                return Mapper.Map<List<FlightViewModel>>(FlightData);
             }
         }
     }
