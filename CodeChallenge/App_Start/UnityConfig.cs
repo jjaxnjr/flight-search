@@ -15,6 +15,8 @@ namespace CodeChallenge
 
             container.RegisterType<IFlightRepository, FlightRepository>();
             container.RegisterType<IFlightService, FlightService>();
+
+            container.RegisterType<IAirportService, AirportService>();
             
             DependencyResolver.SetResolver(new UnityDependencyResolver(container));
         }
