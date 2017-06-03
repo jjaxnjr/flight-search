@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using CodeChallenge.Controllers;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,8 @@ namespace CodeChallenge.Tests.CodeChallenge
             var results = searchController.Index();
 
             // Assert
-            Assert.IsInstanceOfType(results, typeof(ActionResult));
+            Assert.IsInstanceOfType(results, typeof(ViewResult));
+            Assert.AreEqual("Index", results.ViewName);
         }
     }
 }
