@@ -93,6 +93,7 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CodeChallenge.DataAccess\AirportServiceTests.cs" />
     <Compile Include="CodeChallenge.DataAccess\FlightServiceTests.cs" />
     <Compile Include="CodeChallenge\FlightRepositoryTests.cs" />
     <Compile Include="CodeChallenge\FlightControllerTests.cs" />
