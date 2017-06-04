@@ -15,7 +15,7 @@ namespace CodeChallenge
 
             routes.MapRoute(
                 name: "Default",
-                url: "{controller}/{action}/{id}",
+                url: "{anything}",
                 defaults: new { controller = "Search", action = "Index", id = UrlParameter.Optional }
             );
         }

@@ -18,8 +18,16 @@ namespace CodeChallenge.Controllers
 
         public IEnumerable<FlightViewModel> Post(FlightSearch flightSearch)
         {
-            var flights = flightRepository.GetFlights(flightSearch.FromAirport, flightSearch.ToAirport);
-            return flights;
+            try
+            {
+                var flights = flightRepository.GetFlights(flightSearch.FromAirport, flightSearch.ToAirport);
+                return flights;
+            }
+            catch (ArgumentException aex)
+            {
+                // TODO: Log Exception
+                return new List<FlightViewModel>();
+            }
         }
     }
 }
