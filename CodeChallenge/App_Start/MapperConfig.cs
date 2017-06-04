@@ -11,6 +11,7 @@ namespace CodeChallenge
             var config = new MapperConfiguration(cfg =>
                 {
                     cfg.CreateMap<Flight, FlightViewModel>();
+                    cfg.CreateMap<Airport, AirportViewModel>();
                 });
         }
     }

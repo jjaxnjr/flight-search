@@ -95,6 +95,7 @@
   <ItemGroup>
     <Compile Include="CodeChallenge.DataAccess\AirportServiceTests.cs" />
     <Compile Include="CodeChallenge.DataAccess\FlightServiceTests.cs" />
+    <Compile Include="CodeChallenge\AirportRepositoryTests.cs" />
     <Compile Include="CodeChallenge\FlightRepositoryTests.cs" />
     <Compile Include="CodeChallenge\FlightControllerTests.cs" />
     <Compile Include="CodeChallenge\SeachControllerTests.cs" />

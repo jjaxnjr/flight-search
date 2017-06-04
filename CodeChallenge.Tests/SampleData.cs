@@ -54,5 +54,33 @@ namespace CodeChallenge.Tests
                 return Mapper.Map<List<FlightViewModel>>(FlightData);
             }
         }
+
+        public static List<Airport> AirportData
+        {
+            get
+            {
+                return new List<Airport>
+                {
+                    new Airport
+                    {
+                        Code = "SEA",
+                        Name = "Seattle/Tacoma Airport"
+                    },
+                    new Airport
+                    {
+                        Code = "LAX",
+                        Name = "Los Angeles Airport"
+                    }
+                };
+            }
+        }
+
+        public static List<AirportViewModel> AirportViewModelData
+        {
+            get
+            {
+                return Mapper.Map<List<AirportViewModel>>(AirportData);
+            }
+        }
     }
 }
