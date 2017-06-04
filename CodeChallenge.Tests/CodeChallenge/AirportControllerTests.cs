@@ -6,12 +6,7 @@ using CodeChallenge.Models;
 using CodeChallenge.Repositories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Mvc;
 
 namespace CodeChallenge.Tests.CodeChallenge
 {
@@ -30,43 +25,29 @@ namespace CodeChallenge.Tests.CodeChallenge
         }
 
         [TestMethod]
-        public void GetAirportsReturnsJsonResultObject()
+        public void GetReturnsIEnumerableAirportViewModelObject()
         {
             // Arrange
             var airportRepository = new AirportRepository(airportServiceMock.Object);
             var airportController = new AirportController(airportRepository);
 
             // Act
-            var results = airportController.GetAirports();
+            var results = airportController.Get();
 
             // Assert
-            Assert.IsInstanceOfType(results, typeof(JsonResult));
+            Assert.IsInstanceOfType(results, typeof(IEnumerable<AirportViewModel>));
         }
 
         [TestMethod]
-        public void GetAirportsReturnsIEnumerableAirportViewModelObject()
+        public void GetReturnsMultipleAirportViewModelObjects()
         {
             // Arrange
             var airportRepository = new AirportRepository(airportServiceMock.Object);
             var airportController = new AirportController(airportRepository);
 
             // Act
-            var results = airportController.GetAirports();
-
-            // Assert
-            Assert.IsInstanceOfType(results.Data, typeof(IEnumerable<AirportViewModel>));
-        }
-
-        [TestMethod]
-        public void GetAirportsReturnsMultipleAirportViewModelObjects()
-        {
-            // Arrange
-            var airportRepository = new AirportRepository(airportServiceMock.Object);
-            var airportController = new AirportController(airportRepository);
-
-            // Act
-            var results = airportController.GetAirports();
-            var resultsData = results.Data as List<AirportViewModel>;
+            var results = airportController.Get();
+            var resultsData = results as List<AirportViewModel>;
 
             // Assert
             Assert.AreEqual(2, resultsData.Count);
