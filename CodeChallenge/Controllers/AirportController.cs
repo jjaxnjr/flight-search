@@ -19,7 +19,8 @@ namespace CodeChallenge.Controllers
 
         public JsonResult GetAirports()
         {
-            return Json(new List<AirportViewModel>(), JsonRequestBehavior.AllowGet);
+            var airports = airportRepository.GetAirports();
+            return Json(airports, JsonRequestBehavior.AllowGet);
         }
     }
 }

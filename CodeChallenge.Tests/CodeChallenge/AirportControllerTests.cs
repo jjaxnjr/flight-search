@@ -42,5 +42,34 @@ namespace CodeChallenge.Tests.CodeChallenge
             // Assert
             Assert.IsInstanceOfType(results, typeof(JsonResult));
         }
+
+        [TestMethod]
+        public void GetAirportsReturnsIEnumerableAirportViewModelObject()
+        {
+            // Arrange
+            var airportRepository = new AirportRepository(airportServiceMock.Object);
+            var airportController = new AirportController(airportRepository);
+
+            // Act
+            var results = airportController.GetAirports();
+
+            // Assert
+            Assert.IsInstanceOfType(results.Data, typeof(IEnumerable<AirportViewModel>));
+        }
+
+        [TestMethod]
+        public void GetAirportsReturnsMultipleAirportViewModelObjects()
+        {
+            // Arrange
+            var airportRepository = new AirportRepository(airportServiceMock.Object);
+            var airportController = new AirportController(airportRepository);
+
+            // Act
+            var results = airportController.GetAirports();
+            var resultsData = results.Data as List<AirportViewModel>;
+
+            // Assert
+            Assert.AreEqual(2, resultsData.Count);
+        }
     }
 }
