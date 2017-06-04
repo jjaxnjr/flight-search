@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CodeChallenge.DataAccess.Models;
 using System.IO;
 using CsvHelper;
@@ -13,6 +11,23 @@ namespace CodeChallenge.DataAccess
     public class AirportService : IAirportService
     {
         private string airportData;
+        public string AirportData
+        {
+            get
+            {
+                if (airportData == null)
+                {
+                    //Default location when running the application
+                    airportData = Path.GetDirectoryName(AppDomain.CurrentDomain.SetupInformation.ApplicationBase) + @"\bin\SampleData\Airports.csv";
+                }
+                return airportData;
+            }
+            set
+            {
+                //Allows airportData to be overriden in such cases like Unit Tests where the location is different.
+                airportData = Path.GetDirectoryName(AppDomain.CurrentDomain.SetupInformation.ApplicationBase) + value;
+            }
+        }
 
         private IEnumerable<Airport> _airports;
         private IEnumerable<Airport> Airports
@@ -21,7 +36,7 @@ namespace CodeChallenge.DataAccess
             {
                 if (_airports == null)
                 {
-                    using (var stream = new StreamReader(airportData))
+                    using (var stream = new StreamReader(AirportData))
                     {
                         using (var csv = new CsvReader(stream))
                         {
@@ -32,13 +47,7 @@ namespace CodeChallenge.DataAccess
                 return _airports;
             }
         }
-
-        public AirportService()
-        {
-            airportData = Path.GetDirectoryName(AppDomain.CurrentDomain.SetupInformation.ApplicationBase) + @"\Debug\SampleData\Airports.csv";
-        }
-
-
+        
         public IEnumerable<Airport> GetAirports()
         {
             return Airports.ToList();

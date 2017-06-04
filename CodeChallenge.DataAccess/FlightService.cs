@@ -11,6 +11,22 @@ namespace CodeChallenge.DataAccess
     public class FlightService : IFlightService
     {
         private string flightData;
+        public string FlightData {
+            get
+            {
+                if(flightData == null)
+                {
+                    //Default location when running the application
+                    flightData = Path.GetDirectoryName(AppDomain.CurrentDomain.SetupInformation.ApplicationBase) + @"\bin\SampleData\Flights.csv";
+                }
+                return flightData;
+            }
+            set
+            {
+                //Allows flightData to be overriden in such cases like Unit Tests where the location is different.
+                flightData = Path.GetDirectoryName(AppDomain.CurrentDomain.SetupInformation.ApplicationBase) + value;
+            }
+        }
 
         private IEnumerable<Flight> _flights;
         private IEnumerable<Flight> Flights
@@ -19,7 +35,7 @@ namespace CodeChallenge.DataAccess
             {
                 if(_flights == null)
                 {
-                    using (var stream = new StreamReader(flightData))
+                    using (var stream = new StreamReader(FlightData))
                     {
                         using (var csv = new CsvReader(stream))
                         {
@@ -29,11 +45,6 @@ namespace CodeChallenge.DataAccess
                 }
                 return _flights;
             }
-        }
-
-        public FlightService()
-        {
-            flightData = Path.GetDirectoryName(AppDomain.CurrentDomain.SetupInformation.ApplicationBase) + @"\Debug\SampleData\Flights.csv";
         }
 
         public IEnumerable<Flight> GetFlights()

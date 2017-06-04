@@ -8,6 +8,7 @@ using Moq;
 using System;
 using CodeChallenge.DataAccess.Interfaces;
 using System.Linq;
+using CodeChallenge.Repositories;
 
 namespace CodeChallenge.Tests
 {
@@ -25,12 +26,13 @@ namespace CodeChallenge.Tests
     public class FlightControllerTests
     {
         private Mock<IFlightService> flightServiceMock;
+        private IMapper mapper;
 
         [TestInitialize]
         public void Initialize()
         {
-            Mapper.Initialize(cfg => cfg.CreateMap<Flight, FlightViewModel>());
-            
+            mapper = MapperConfig.RegisterMappings();
+
             flightServiceMock = new Mock<IFlightService>();
             flightServiceMock.Setup(f => f.GetFlights()).Returns(SampleData.FlightData);
         }
@@ -39,7 +41,7 @@ namespace CodeChallenge.Tests
         public void GetFlightsReturnsIEnumerableFlightViewModelObject()
         {
             // Arrange
-            var flightRepository = new FlightRepository(flightServiceMock.Object);
+            var flightRepository = new FlightRepository(flightServiceMock.Object, mapper);
             var flightController = new FlightController(flightRepository);
             var flightSearch = new FlightSearch()
             {
@@ -58,7 +60,7 @@ namespace CodeChallenge.Tests
         public void GetFlightsReturnsMulitpleFlightRecords()
         {
             // Arrange
-            var flightRepository = new FlightRepository(flightServiceMock.Object);
+            var flightRepository = new FlightRepository(flightServiceMock.Object, mapper);
             var flightController = new FlightController(flightRepository);
             var flightSearch = new FlightSearch()
             {
@@ -78,7 +80,7 @@ namespace CodeChallenge.Tests
         public void GetFlightsWithSameAirportReturnsException()
         {
             // Arrange
-            var flightRepository = new FlightRepository(flightServiceMock.Object);
+            var flightRepository = new FlightRepository(flightServiceMock.Object, mapper);
             var flightController = new FlightController(flightRepository);
             var flightSearch = new FlightSearch()
             {
@@ -97,7 +99,7 @@ namespace CodeChallenge.Tests
         public void GetFlightsFromSeaToLasReturnsAFlightObject()
         {
             // Arrange
-            var flightRepository = new FlightRepository(flightServiceMock.Object);
+            var flightRepository = new FlightRepository(flightServiceMock.Object, mapper);
             var flightController = new FlightController(flightRepository);
             var flightSearch = new FlightSearch()
             {

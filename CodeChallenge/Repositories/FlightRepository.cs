@@ -6,15 +6,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace CodeChallenge
+namespace CodeChallenge.Repositories
 {
     public class FlightRepository : IFlightRepository
     {
         private IFlightService flightService;
+        private IMapper mapper;
 
-        public FlightRepository(IFlightService fService)
+        public FlightRepository(IFlightService fService, IMapper mapr)
         {
             flightService = fService;
+            mapper = mapr;
         }
 
         public IEnumerable<FlightViewModel> GetFlights(string from, string to)
@@ -26,7 +28,7 @@ namespace CodeChallenge
             var results = flightService.GetFlights()
                                        .Where(f => f.From.ToUpper().Equals(from.ToUpper()) &&
                                                    f.To.ToUpper().Equals(to.ToUpper()));
-            return Mapper.Map<IEnumerable<FlightViewModel>>(results);
+            return mapper.Map<IEnumerable<FlightViewModel>>(results);
         }
     }
 }

@@ -14,11 +14,12 @@ namespace CodeChallenge.Tests.CodeChallenge
     public class AirportRepositoryTests
     {
         private Mock<IAirportService> airportServiceMock;
+        private IMapper mapper;
 
         [TestInitialize]
         public void Initialize()
         {
-            Mapper.Initialize(cfg => cfg.CreateMap<Airport, AirportViewModel>());
+            mapper = MapperConfig.RegisterMappings();
 
             airportServiceMock = new Mock<IAirportService>();
             airportServiceMock.Setup(a => a.GetAirports()).Returns(SampleData.AirportData);
@@ -28,7 +29,7 @@ namespace CodeChallenge.Tests.CodeChallenge
         public void GetAirportsReturnsMultipleAirportViewModelObjects()
         {
             // Arrange
-            var airportRepository = new AirportRepository(airportServiceMock.Object);
+            var airportRepository = new AirportRepository(airportServiceMock.Object, mapper);
 
             // Act
             var airports = airportRepository.GetAirports();

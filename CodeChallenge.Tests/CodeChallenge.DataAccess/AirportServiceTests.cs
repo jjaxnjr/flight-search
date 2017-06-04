@@ -14,6 +14,7 @@ namespace CodeChallenge.Tests.CodeChallenge.DataAccess
         {
             // Arrange
             var airportService = new AirportService();
+            airportService.AirportData = @"\Debug\SampleData\Airports.csv";
 
             // Act
             var results = airportService.GetAirports();
@@ -27,6 +28,7 @@ namespace CodeChallenge.Tests.CodeChallenge.DataAccess
         {
             // Arrange
             var airportService = new AirportService();
+            airportService.AirportData = @"\Debug\SampleData\Airports.csv";
 
             // Act
             var results = airportService.GetAirports();

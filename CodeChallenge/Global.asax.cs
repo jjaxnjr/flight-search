@@ -14,7 +14,7 @@ namespace CodeChallenge
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            MapperConfig.RegisterMappings();
+            UnityConfig.RegisterComponents(MapperConfig.RegisterMappings());
         }
     }
 }

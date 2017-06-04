@@ -2,6 +2,7 @@
 using CodeChallenge.DataAccess.Interfaces;
 using CodeChallenge.DataAccess.Models;
 using CodeChallenge.Models;
+using CodeChallenge.Repositories;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using System.Collections.Generic;
@@ -13,11 +14,12 @@ namespace CodeChallenge.Tests.CodeChallenge.DataAccess
     public class FlightRepositoryTests
     {
         private Mock<IFlightService> flightServiceMock;
+        private IMapper mapper;
 
         [TestInitialize]
         public void Initialize()
         {
-            Mapper.Initialize(cfg => cfg.CreateMap<Flight, FlightViewModel>());
+            mapper = MapperConfig.RegisterMappings();
 
             flightServiceMock = new Mock<IFlightService>();
             flightServiceMock.Setup(f => f.GetFlights()).Returns(SampleData.FlightData);
@@ -27,7 +29,7 @@ namespace CodeChallenge.Tests.CodeChallenge.DataAccess
         public void GetFlightsReturnsMultipleFlightViewModelResults()
         {
             // Arrange
-            var flightRepo = new FlightRepository(flightServiceMock.Object);
+            var flightRepo = new FlightRepository(flightServiceMock.Object, mapper);
             string fromFlight = "SEA";
             string toFlight = "LAX";
 
@@ -42,7 +44,7 @@ namespace CodeChallenge.Tests.CodeChallenge.DataAccess
         public void GetFlightsFromSeaToLasReturnsAFlightObject()
         {
             // Arrange
-            var flightRepo = new FlightRepository(flightServiceMock.Object);
+            var flightRepo = new FlightRepository(flightServiceMock.Object, mapper);
             var from = "SEA";
             var to = "LAS";
 

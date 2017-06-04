@@ -1,10 +1,6 @@
 ﻿using CodeChallenge.DataAccess;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CodeChallenge.Tests.CodeChallenge.DataAccess
 {
@@ -17,6 +13,7 @@ namespace CodeChallenge.Tests.CodeChallenge.DataAccess
         {
             // Arrange
             var flightService = new FlightService();
+            flightService.FlightData = @"\Debug\SampleData\Flights.csv";
 
             // Act
             var results = flightService.GetFlights();

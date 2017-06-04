@@ -6,13 +6,15 @@ namespace CodeChallenge
 {
     public class MapperConfig
     {
-        public static void RegisterMappings()
+        public static IMapper RegisterMappings()
         {
             var config = new MapperConfiguration(cfg =>
                 {
                     cfg.CreateMap<Flight, FlightViewModel>();
                     cfg.CreateMap<Airport, AirportViewModel>();
                 });
+
+            return config.CreateMapper();
         }
     }
 }

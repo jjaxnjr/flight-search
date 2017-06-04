@@ -12,15 +12,17 @@ namespace CodeChallenge.Repositories
     public class AirportRepository : IAirportRepository
     {
         private IAirportService airportService;
+        private IMapper mapper;
 
-        public AirportRepository(IAirportService aService)
+        public AirportRepository(IAirportService aService, IMapper mapr)
         {
             airportService = aService;
+            mapper = mapr;
         }
 
         public IEnumerable<AirportViewModel> GetAirports()
         {
-            return Mapper.Map<IEnumerable<AirportViewModel>>(airportService.GetAirports());
+            return mapper.Map<IEnumerable<AirportViewModel>>(airportService.GetAirports());
         }
     }
 }
