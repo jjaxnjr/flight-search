@@ -41,11 +41,14 @@ namespace CodeChallenge.Tests
             // Arrange
             var flightRepository = new FlightRepository(flightServiceMock.Object);
             var flightController = new FlightController(flightRepository);
-            var fromAirport = "SEA";
-            var toAirport = "LAX";
-            
+            var flightSearch = new FlightSearch()
+            {
+                FromAirport = "SEA",
+                ToAirport = "LAX"
+            };
+
             // Act
-            var flights = flightController.Post(fromAirport, toAirport);
+            var flights = flightController.Post(flightSearch);
 
             // Assert
             Assert.IsInstanceOfType(flights, typeof(IEnumerable<FlightViewModel>));
@@ -57,11 +60,14 @@ namespace CodeChallenge.Tests
             // Arrange
             var flightRepository = new FlightRepository(flightServiceMock.Object);
             var flightController = new FlightController(flightRepository);
-            var fromAirport = "SEA";
-            var toAirport = "LAX";
-            
+            var flightSearch = new FlightSearch()
+            {
+                FromAirport = "SEA",
+                ToAirport = "LAX"
+            };
+
             // Act
-            var flights = flightController.Post(fromAirport, toAirport);
+            var flights = flightController.Post(flightSearch);
             
             // Assert
             Assert.AreEqual(2, flights.Count());
@@ -74,10 +80,14 @@ namespace CodeChallenge.Tests
             // Arrange
             var flightRepository = new FlightRepository(flightServiceMock.Object);
             var flightController = new FlightController(flightRepository);
-            var fromTo = "SEA";
+            var flightSearch = new FlightSearch()
+            {
+                FromAirport = "SEA",
+                ToAirport = "SEA"
+            };
 
             // Act
-            flightController.Post(fromTo, fromTo);
+            flightController.Post(flightSearch);
 
             // Assert
             // Exception Throw and handled by Method Attribute
@@ -89,11 +99,14 @@ namespace CodeChallenge.Tests
             // Arrange
             var flightRepository = new FlightRepository(flightServiceMock.Object);
             var flightController = new FlightController(flightRepository);
-            var from = "SEA";
-            var to = "LAS";
+            var flightSearch = new FlightSearch()
+            {
+                FromAirport = "SEA",
+                ToAirport = "LAS"
+            };
 
             // Act
-            var flights = flightController.Post(from, to);
+            var flights = flightController.Post(flightSearch);
             var flightData = flights as List<FlightViewModel>;
 
             // Assert

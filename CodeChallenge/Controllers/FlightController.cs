@@ -16,9 +16,9 @@ namespace CodeChallenge.Controllers
             flightRepository = flightRepo;
         }
 
-        public IEnumerable<FlightViewModel> Post(string from, string to)
+        public IEnumerable<FlightViewModel> Post(FlightSearch flightSearch)
         {
-            var flights = flightRepository.GetFlights(from, to);
+            var flights = flightRepository.GetFlights(flightSearch.FromAirport, flightSearch.ToAirport);
             return flights;
         }
     }
