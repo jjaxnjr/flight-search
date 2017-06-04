@@ -1,10 +1,13 @@
 ﻿using CodeChallenge.Interfaces;
+using CodeChallenge.Models;
 using System;
+using System.Collections.Generic;
+using System.Web.Http;
 using System.Web.Mvc;
 
 namespace CodeChallenge.Controllers
 {
-    public class FlightController : Controller
+    public class FlightController : ApiController
     {
         private IFlightRepository flightRepository;
 
@@ -13,16 +16,10 @@ namespace CodeChallenge.Controllers
             flightRepository = flightRepo;
         }
 
-        // GET: Field
-        public ActionResult Index()
-        {
-            return View();
-        }
-
-        public JsonResult GetFlights(string from, string to)
+        public IEnumerable<FlightViewModel> Post(string from, string to)
         {
             var flights = flightRepository.GetFlights(from, to);
-            return Json(flights, JsonRequestBehavior.AllowGet);
+            return flights;
         }
     }
 }
