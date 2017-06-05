@@ -123,7 +123,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\Components\airport.component.html" />
     <Content Include="app\Components\search.component.html" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
@@ -191,7 +190,6 @@
     <TypeScriptCompile Include="app\app.component.ts" />
     <TypeScriptCompile Include="app\app.module.ts" />
     <TypeScriptCompile Include="app\app.routing.ts" />
-    <TypeScriptCompile Include="app\Components\airport.component.ts" />
     <TypeScriptCompile Include="app\Components\search.component.ts" />
     <TypeScriptCompile Include="app\main.ts" />
     <TypeScriptCompile Include="app\Models\airport.ts" />
