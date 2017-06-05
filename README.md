@@ -4,7 +4,7 @@ Here is the results of the code challenge.
 * I used ASP.NET MVC 5 and Web API 2 on .NET 4.6.1.
 * The client side uses Angular 4.
 * The server side was approached with TDD.
-* The client side was my first time using Typescript and Angular 4 so I didn't write unit tests there to save one some time.
+* The client side was my first time using Typescript and Angular 4 so I didn't write unit tests there to save some time.
 * All three required components for Selecting, Searching, and Sorting results are implemented.
 * The two extra credit components are also included.
 
