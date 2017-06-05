@@ -76,8 +76,7 @@ namespace CodeChallenge.Tests
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentException))]
-        public void GetFlightsWithSameAirportReturnsException()
+        public void GetFlightsWithSameAirportReturnsEmptyResults()
         {
             // Arrange
             var flightRepository = new FlightRepository(flightServiceMock.Object, mapper);
@@ -89,10 +88,11 @@ namespace CodeChallenge.Tests
             };
 
             // Act
-            flightController.Post(flightSearch);
+            var results = flightController.Post(flightSearch);
+            var resultsData = results as List<FlightViewModel>;
 
             // Assert
-            // Exception Throw and handled by Method Attribute
+            Assert.AreEqual(0, resultsData.Count);
         }
 
         [TestMethod]
