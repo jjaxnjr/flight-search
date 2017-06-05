@@ -15,7 +15,7 @@ Tools I added to the project:
   * Unity.WebAPI
 * Moq
 * CsvHelper
-* Angular2 with TypeScript
+* Angular4 with TypeScript
 
 Ohter things I would do to make this fully production ready:
 * Add Client Side Unit Tests
