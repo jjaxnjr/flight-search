@@ -5,21 +5,39 @@
     <div class="panel-body">
         <form (ngSubmit)="onSubmit(searchFrm)" [formGroup]="searchFrm">
             <div class="form-group">
-                <div>
-                    <select formControlName="FromAirport" class="form-control">
-                        <option *ngFor="let airport of fromAirports;" [value]="airport.Code">{{airport.Name}}</option>
-                    </select>
+                <div class="row">
+                    <div class="col-md-3">
+                        <select formControlName="FromAirport" class="form-control" (change)="fromSelected($event.target.value);">
+                            <option value="" disabled selected>From</option>
+                            <option *ngFor="let airport of fromAirports;" [value]="airport.Code">{{airport.Name}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <select formControlName="ToAirport" class="form-control">
+                            <option value="" disabled selected>To</option>
+                            <option *ngFor="let airport of toAirports;" [value]="airport.Code">{{airport.Name}}</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="submit" [disabled]="searchFrm.invalid" class="btn btn-primary">Search</button>
+                    </div>
                 </div>
-                <div>
-                    <select formControlName="ToAirport" class="form-control">
-                        <option *ngFor="let airport of toAirports;" [value]="airport.Code">{{airport.Name}}</option>
-                    </select>
-                </div>
-                <div>
-                    <button type="submit" [disabled]="searchFrm.invalid" class="btn btn-primary">Search</button>
-                </div>
+                
             </div>
         </form>
+        <div *ngIf="msg" role="alert" class="alert alert-info alert-dismissable">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+            {{msg}}
+        </div>
+    </div>
+</div>
+<div class="panel panel-primary" *ngIf="flights && flights.length">
+    <div class="panel-heading">
+        Search Results
+    </div>
+    <div class="panel-body">
         <div class="table-responsive">
             <div class="alert alert-info" role="alert" *ngIf="indLoading">
                 <img src="../../images/loading.gif" width="32" height="32" /> Loading...
@@ -31,10 +49,26 @@
                         <th>Flight Number</th>
                         <th>From Airport</th>
                         <th>To Airport</th>
-                        <th>Departs At</th>
-                        <th>Arrives At</th>
-                        <th>Main Cabin Price</th>
-                        <th>First Class Price</th>
+                        <th (click)="sort('Departs')">
+                            Departs At
+                            <span *ngIf="sortColumn === 'Departs' && sortAscending" class="glyphicon glyphicon-chevron-down"></span>
+                            <span *ngIf="sortColumn === 'Departs' && !sortAscending" class="glyphicon glyphicon-chevron-up"></span>
+                        </th>
+                        <th (click)="sort('Arrives')">
+                            Arrives At
+                            <span *ngIf="sortColumn === 'Arrives' && sortAscending" class="glyphicon glyphicon-chevron-down"></span>
+                            <span *ngIf="sortColumn === 'Arrives' && !sortAscending" class="glyphicon glyphicon-chevron-up"></span>
+                        </th>
+                        <th (click)="sort('MainCabinPrice')">
+                            Main Cabin Price
+                            <span *ngIf="sortColumn === 'MainCabinPrice' && sortAscending" class="glyphicon glyphicon-chevron-down"></span>
+                            <span *ngIf="sortColumn === 'MainCabinPrice' && !sortAscending" class="glyphicon glyphicon-chevron-up"></span>
+                        </th>
+                        <th (click)="sort('FirstClassPrice')">
+                            First Class Price
+                            <span *ngIf="sortColumn === 'FirstClassPrice' && sortAscending" class="glyphicon glyphicon-chevron-down"></span>
+                            <span *ngIf="sortColumn === 'FirstClassPrice' && !sortAscending" class="glyphicon glyphicon-chevron-up"></span>
+                        </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -50,12 +84,6 @@
                 </tbody>
             </table>
             <div></div>
-        </div>
-        <div *ngIf="msg" role="alert" class="alert alert-info alert-dismissable">
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
-            <span class="sr-only">Error:</span>
-            {{msg}}
         </div>
     </div>
 </div>

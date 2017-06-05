@@ -21,6 +21,8 @@ export class SearchComponent implements OnInit {
     indLoading: boolean = false;
     searchFrm: FormGroup;
     flights: IFlight[];
+    sortAscending: boolean = true;
+    sortColumn: string;
 
     constructor(private fb: FormBuilder, private _airportService: AirportService, private _flightService: FlightService) { }
 
@@ -58,11 +60,55 @@ export class SearchComponent implements OnInit {
         );
     }
 
-    fromSelected(formData: IFlightSearch): void {
+    fromSelected(data: any): void {
         // Refresh the to options and filter out the selected from.
         this._airportService.get(Global.BASE_AIRPORT_ENDPOINT)
             .subscribe(airports => {
-                this.toAirports = airports.filter(to => to.Code != formData.FromAirport);
+                this.toAirports = airports.filter(function (to) {
+                    return to.Code !== data;
+                })
             })
+    }
+
+    sort(columnName: string) {
+        if (!this.sortColumn || this.sortColumn !== columnName) {
+            this.sortColumn = columnName;
+            this.sortAscending = true;
+        } else {
+            this.sortAscending = !this.sortAscending;
+        }
+
+        var reverse = this.sortAscending ? 1 : -1;
+
+        switch (this.sortColumn) {
+            case "Departs":
+                this.flights.sort(function (a, b) {
+                    var a1 = Date.parse("1/1/2017 " + a.Departs);
+                    var b1 = Date.parse("1/1/2017 " + b.Departs);
+                    return a1 - b1 * reverse;
+                });
+                break;
+            case "Arrives":
+                this.flights.sort(function (a, b) {
+                    var a1 = Date.parse("1/1/2017 " + a.Arrives);
+                    var b1 = Date.parse("1/1/2017 " + b.Arrives);
+                    return a1 - b1 * reverse;
+                });
+                break;
+            case "MainCabinPrice":
+                this.flights.sort(function (a, b) {
+                    var a1 = parseFloat(a.MainCabinPrice);
+                    var b1 = parseFloat(b.MainCabinPrice);
+                    return a1 - b1 * reverse;
+                });
+                break;
+            case "FirstClassPrice":
+                this.flights.sort(function (a, b) {
+                    var a1 = parseFloat(a.FirstClassPrice);
+                    var b1 = parseFloat(b.FirstClassPrice);
+                    return a1 - b1 * reverse;
+                });
+                break;
+        }
     }
 }
